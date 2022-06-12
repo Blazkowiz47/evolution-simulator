@@ -12,12 +12,11 @@ def convertFramesToVideo(dir: str, size: tuple):
 
     fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
     out = cv2.VideoWriter(
-        dir+'/result.avi', fourcc, 30, size)
+        dir+'/result.avi', fourcc, 60, size)
     with os.scandir(dir) as it:
-        for f in tqdm(it, "Processed frames "):
+        for f in it:
             if 'png' in f.name:
                 image = cv2.imread(f.path)
-                for _ in range(6):
-                    out.write(image)
+                out.write(image)
                 os.remove(f.path)
     out.release()

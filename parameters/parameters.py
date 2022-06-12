@@ -25,7 +25,7 @@ class Parameter:
     probabilityOfGeneDeletion: float = field(default=0.0001)
     maxGenomeLength: int = field(default=7)
     minGenomeLength: int = field(default=1)
-    sruvival_criteria: int = field(default=1)
+    survival_criteria: int = field(default=1)
     maxChildren: int = field(default=3)
 
     # auto uppdates

@@ -1,4 +1,5 @@
 import logging
+
 from operator import ge
 import random as rn
 import math
@@ -54,14 +55,21 @@ class Simulator:
             self.image_count += 1
 
             for _ in range(self.params.stepsPerGeneration):
+                
+                # for multithreaded system
+                # with concurrent.futures.ThreadPoolExecutor() as executor:
+                #     executor.map(self.feed_forward, range(len(self.creatures)))
 
                 for index in range(len(self.creatures)):
 
                     self.feed_forward(index=index)
+
                 saveFrame(self.params.imageDir , self.image_count , self.world.grid)
                 self.image_count += 1
+                
             self.evaluateSurvival()
             self.spawnNewGeneration()
+
         print("Completed simulation.")
 
     def generateVideo(self):

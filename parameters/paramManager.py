@@ -43,8 +43,8 @@ class ParamManager:
             self._params.genomeInitialLengthMin = int(value)
         elif name == "genomeInitialLengthMax":
             self._params.genomeInitialLengthMax = int(value)
-        elif name == "sruvival_criteria":
-            self._params.sruvival_criteria = int(value)
+        elif name == "survival_criteria":
+            self._params.survival_criteria = int(value)
         elif name == "maxChildren":
             self._params.maxChildren = int(value)
         else:

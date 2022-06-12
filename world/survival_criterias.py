@@ -12,7 +12,7 @@ def dualWorld(sizeX: int, sizeY: int):
 
 
 def getSurvivalCriteria(params: Parameter):
-    if params.sruvival_criteria == 1:
+    if params.survival_criteria == 1:
         return dualWorld(params.sizeX, params.sizeY)
     else:
         logging.debug('Invalid Survival Criteria.')
