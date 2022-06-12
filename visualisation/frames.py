@@ -19,5 +19,5 @@ def convertFramesToVideo(dir: str):
         size = (image.shape[0], image.shape[1])
         for _ in range(6):
             out.write(image)
-
+        os.remove(dir + '/'+f)
     out.release()
