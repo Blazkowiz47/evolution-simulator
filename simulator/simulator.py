@@ -8,7 +8,7 @@ from creatures.brain.brain import Neuron
 from creatures.genome.genome import initialiseRandomGenome
 from creatures.creatures import Creature
 from creatures.genome.reproduction import generateChildGenome
-from logs.frames import convertFramesToVideo, saveFrame
+from visualisation.frames import convertFramesToVideo, saveFrame
 from parameters.paramManager import ParamManager
 from world.survival_criterias import getSurvivalCriteria
 from world.world import World
