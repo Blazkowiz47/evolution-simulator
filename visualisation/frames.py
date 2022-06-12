@@ -17,6 +17,13 @@ def convertFramesToVideo(dir: str, size: tuple, end: int):
         image = cv2.imread(dir+'/'+str(i)+'.png')
         out.write(image)
         os.remove(dir+'/'+str(i)+'.png')
+
+    # for f in tqdm(os.listdir(dir), "Frames processed "):
+    #     if 'png' in f:
+    #         image = cv2.imread(dir+'/'+f)
+    #         out.write(image)
+    #         os.remove(dir+'/'+f)
+
     # with os.scandir(dir) as it:
     #     for f in it:
     #         if 'png' in f.name:

@@ -75,7 +75,7 @@ class Simulator:
 
     def generateVideo(self):
         print("Generating video.")
-        convertFramesToVideo(self.params.imageDir, (self.params.sizeX ,self.params.sizeY ))    
+        convertFramesToVideo(self.params.imageDir, (self.params.sizeX ,self.params.sizeY ) , self.image_count)    
         print("Video generated.")
 
     def spawnNewGeneration(self):
