@@ -1,5 +1,5 @@
 import logging
-
+import concurrent.futures
 from operator import ge
 import random as rn
 import math
@@ -57,6 +57,7 @@ class Simulator:
             for _ in range(self.params.stepsPerGeneration):
                 
                 # for multithreaded system
+                
                 # with concurrent.futures.ThreadPoolExecutor() as executor:
                 #     executor.map(self.feed_forward, range(len(self.creatures)))
 
@@ -105,7 +106,7 @@ class Simulator:
     def evaluateSurvival(self):
         for index , creature in enumerate(self.creatures):
             if self.survival_criteria[creature.location] == -1:
-               self.creatures[index].alive == False 
+               self.creatures[index].alive = False 
 
     # supply creature index
     def feed_forward(self, index: int):
