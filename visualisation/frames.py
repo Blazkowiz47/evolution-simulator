@@ -1,4 +1,5 @@
 import os
+from tqdm import tqdm
 import numpy as np
 import cv2
 
@@ -13,9 +14,8 @@ def convertFramesToVideo(dir: str):
     out = cv2.VideoWriter(
         dir+'/result.avi', fourcc, 30, size)
     size = None
-    for f in os.listdir(dir):
+    for f in tqdm(os.listdir(dir), "Processed frames "):
         image = cv2.imread(dir + '/'+f)
-
         size = (image.shape[0], image.shape[1])
         for _ in range(6):
             out.write(image)
