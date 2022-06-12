@@ -14,8 +14,9 @@ def convertFramesToVideo(dir: str, size: tuple):
     out = cv2.VideoWriter(
         dir+'/result.avi', fourcc, 30, size)
     for f in tqdm(os.listdir(dir), "Processed frames "):
-        image = cv2.imread(dir + '/'+f)
-        for _ in range(6):
-            out.write(image)
-        os.remove(dir + '/'+f)
+        if 'png' in f:
+            image = cv2.imread(dir + '/'+f)
+            for _ in range(6):
+                out.write(image)
+            os.remove(dir + '/'+f)
     out.release()
