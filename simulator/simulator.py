@@ -62,8 +62,12 @@ class Simulator:
                 self.image_count += 1
             self.evaluateSurvival()
             self.spawnNewGeneration()
-        print("Completed simulation.\nGenerating video.")
-        convertFramesToVideo(self.params.imageDir, (self.params.sizeX ,self.params.sizeY ))
+        print("Completed simulation.")
+
+    def generateVideo(self):
+        print("Generating video.")
+        convertFramesToVideo(self.params.imageDir, (self.params.sizeX ,self.params.sizeY ))    
+        print("Video generated.")
 
     def spawnNewGeneration(self):
         last_generation = [c  for c in self.creatures if c.alive]
