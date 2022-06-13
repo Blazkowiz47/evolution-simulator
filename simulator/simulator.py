@@ -13,7 +13,7 @@ from visualisation.frames import convertFramesToVideo, saveFrame
 from parameters.paramManager import ParamManager
 from world.survival_criterias import getSurvivalCriteria
 from world.world import World
-from world.world_utils import CREATURE_PRESENT
+from world.world_utils import CREATURE_ABSENT, CREATURE_PRESENT, WALL_PRESENT
 
 
 class Simulator:
@@ -33,8 +33,8 @@ class Simulator:
             while not valid:
                 x = rn.randint(0, self.params.sizeX-1)
                 y = rn.randint(0, self.params.sizeY-1)
-                if self.world.grid[x][y] == 0:
-                    self.world.grid[x][y] = CREATURE_PRESENT
+                if self.world.grid[x][y] == 0: 
+                    self.world.grid[x][y] = len(self.creatures) + 1
                     valid = True
             self.creatures.append(
                 Creature(
@@ -92,7 +92,7 @@ class Simulator:
                     x = rn.randint(0, self.params.sizeX-1)
                     y = rn.randint(0, self.params.sizeY-1)
                     if self.world.grid[x][y] == 0:
-                        self.world.grid[x][y] = CREATURE_PRESENT
+                        self.world.grid[x][y] = len(self.creatures) + 1
                         valid = True
                 self.creatures.append(
                     Creature(
@@ -120,7 +120,6 @@ class Simulator:
                 except:
                     pass
 
-
     def getInput(self, neuron: Neuron, index: int):
         if neuron.source is SensoryNeurons.LOC_X:
             return self.creatures[index].location[0]
@@ -142,7 +141,7 @@ class Simulator:
                 red = self.params.sizeY - 1
             for r in range(rst, red):
                 for c in range(cst, ced):
-                    if self.world.grid[r][c] == CREATURE_PRESENT:
+                    if self.world.grid[r][c] != CREATURE_ABSENT and self.world.grid[r][c] != WALL_PRESENT:
                         result += 1
             return result / ((ced - cst) * (red - rst))
         elif neuron.source is SensoryNeurons.AGE:
@@ -175,7 +174,7 @@ class Simulator:
                 return
             new_location = (last_location[0],last_location[1]+1)
 
-            while self.world.grid[new_location] == CREATURE_PRESENT:
+            while self.world.grid[new_location] != CREATURE_ABSENT and self.world.grid[new_location] != WALL_PRESENT:
                 if new_location[1] == self.params.sizeY-1:
                     return
                 new_location = (new_location[0],new_location[1]+1)
@@ -183,14 +182,14 @@ class Simulator:
             self.creatures[index].last_location = last_location
             self.creatures[index].location = new_location
             self.world.grid[last_location] = 0
-            self.world.grid[new_location] = CREATURE_PRESENT
+            self.world.grid[new_location] = index+1
         elif action is ActionNeurons.MOV_L:
             last_location = self.creatures[index].location
             if last_location[0] == 0:
                 return
             new_location = (last_location[0]-1,last_location[1])
 
-            while self.world.grid[new_location] == CREATURE_PRESENT:
+            while self.world.grid[new_location] != CREATURE_ABSENT and self.world.grid[new_location] != WALL_PRESENT:
                 if new_location[0] == 0:
                     return
                 new_location = (new_location[0]-1,new_location[1])
@@ -198,14 +197,14 @@ class Simulator:
             self.creatures[index].last_location = last_location
             self.creatures[index].location = new_location
             self.world.grid[last_location] = 0
-            self.world.grid[new_location] = CREATURE_PRESENT
+            self.world.grid[new_location] = index+1
         elif action is ActionNeurons.MOV_R:
             last_location = self.creatures[index].location
             if last_location[0] == self.params.sizeX-1:
                 return
             new_location = (last_location[0]+1,last_location[1])
 
-            while self.world.grid[new_location] == CREATURE_PRESENT:
+            while self.world.grid[new_location] != CREATURE_ABSENT and self.world.grid[new_location] != WALL_PRESENT:
                 if new_location[0] == self.params.sizeX-1:
                     return
                 new_location = (new_location[0]+1,new_location[1])
@@ -213,20 +212,20 @@ class Simulator:
             self.creatures[index].last_location = last_location
             self.creatures[index].location = new_location
             self.world.grid[last_location] = 0
-            self.world.grid[new_location] = CREATURE_PRESENT
+            self.world.grid[new_location] = index+1
         elif action is ActionNeurons.MOV_U:
             last_location = self.creatures[index].location
             if last_location[1] == 0:
                 return
             new_location = (last_location[0],last_location[1]-1)
-            while self.world.grid[new_location] == CREATURE_PRESENT:
+            while self.world.grid[new_location] != CREATURE_ABSENT and self.world.grid[new_location] != WALL_PRESENT:
                 if new_location[1] == 0:
                     return
                 new_location = (new_location[0],new_location[1]-1)
             self.creatures[index].last_location = last_location
             self.creatures[index].location = new_location
             self.world.grid[last_location] = 0
-            self.world.grid[new_location] = CREATURE_PRESENT
+            self.world.grid[new_location] = index+1
         elif action is ActionNeurons.MOV_Rn:
             direction = rn.randint(0,255)
             if direction % 4 == 0:

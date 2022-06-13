@@ -1,7 +1,8 @@
 import cv2
 import numpy as np
 
-CREATURE_PRESENT = 0xFF
+WALL_PRESENT = 0x7FFFFFFF
+CREATURE_ABSENT = 0
 
 def importWorldFromImage(img_path: str):
     return cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
