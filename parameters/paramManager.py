@@ -47,6 +47,12 @@ class ParamManager:
             self._params.survival_criteria = int(value)
         elif name == "maxChildren":
             self._params.maxChildren = int(value)
+        elif name == "mutationProbability":
+            self._params.maxChildren = float(value)
+        elif name == "probabilityOfGeneInsertion":
+            self._params.maxChildren = float(value)
+        elif name == "probabilityOfGeneDeletion":
+            self._params.maxChildren = float(value)
         else:
             logging.debug("Invalid parameter " + name + " with value " + value)
 
