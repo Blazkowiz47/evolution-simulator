@@ -21,7 +21,7 @@ class Simulator:
     world = None
     creatures = None
     survival_criteria: None
-    image_count = 1
+    image_count = 0
     # world grid with value 0xFF contains a creature
     def __init__(self, configFile: str):
         self.params = ParamManager(configFileName=configFile).params
@@ -51,9 +51,8 @@ class Simulator:
     def simulate(self):
         print("Starting simulation")
         for generation in tqdm(range(self.params.maxGenerations),"Generation: "):
-            saveFrame(self.params.imageDir , self.image_count , self.world.grid)
+            saveFrame(self.params.imageDir ,str(self.image_count) , self.world.grid)
             self.image_count += 1
-
             for _ in range(self.params.stepsPerGeneration):
                 
                 # for multithreaded system
@@ -65,9 +64,8 @@ class Simulator:
 
                     self.feed_forward(index=index)
 
-                saveFrame(self.params.imageDir , self.image_count , self.world.grid)
+                saveFrame(self.params.imageDir ,str(self.image_count) , self.world.grid)
                 self.image_count += 1
-                
             self.evaluateSurvival()
             self.spawnNewGeneration()
 
