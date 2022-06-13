@@ -13,7 +13,7 @@ from visualisation.frames import convertFramesToVideo, saveFrame
 from parameters.paramManager import ParamManager
 from world.survival_criterias import getSurvivalCriteria
 from world.world import World
-from world.world_utils import CREATURE_ABSENT, CREATURE_PRESENT, WALL_PRESENT
+from world.world_utils import CREATURE_ABSENT, WALL_PRESENT
 
 
 class Simulator:
